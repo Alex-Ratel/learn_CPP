@@ -1,5 +1,7 @@
 #include <iostream>
 #include "BitsPrinter.h"
+#include <limits>
+
 
 
 int main() // Точка входу в программу, так ОС понимает откуда надо начинать выполнение программы
@@ -9,17 +11,23 @@ int main() // Точка входу в программу, так ОС понимает откуда надо начинать выпо
 		BitsPrinter<char>::PrintBits(5);
 		BitsPrinter<signed char>::PrintBits(-127);
 		BitsPrinter<unsigned char>::PrintBits(129);
-		BitsPrinter<float>::PrintBits(59.7);
+		BitsPrinter<float>::PrintBits(-59.7);
 		BitsPrinter<int>::PrintBits(59);
 
+		double a = 69.4;
+		double b = 79.4;
+		b -= 10;
+		if (std::abs(a - b) < std::numeric_limits<double>::epsilon())
+		{
+			std::cout << "equal\n";
+		}
+		;
 	}
-
 	// stack
 	{
 		char first_var = 5; // Мы выделяем на стеке 1 байт под переменную first_var и записываем 
 							// по этому адресу значение 5. В контексте языка c++ мы можем говорить,
 							// что мы инициализировали переменную first_var числом 5
-
 
 		char* first_var_addr = &first_var; // переменная first_var_addr- это указатель типа char. 
 										   // first_var_addr хранит в себе адрес по которому находится 
@@ -34,7 +42,6 @@ int main() // Точка входу в программу, так ОС понимает откуда надо начинать выпо
 			<< "\nfirst_var_addr size: " << sizeof(first_var_addr) << std::endl;
 		std::cout << "=============================" << std::endl;
 	}
-
 	// heap
 	{
 		int* second_var; // объявляем указатель типа int
@@ -53,7 +60,6 @@ int main() // Точка входу в программу, так ОС понимает откуда надо начинать выпо
 		std::cout << "=============================" << std::endl;
 		delete second_var; // освобождаем память
 	}
-	
-	
+
 	return 0;
 }
